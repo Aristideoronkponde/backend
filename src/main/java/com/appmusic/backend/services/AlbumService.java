@@ -25,21 +25,7 @@ public class AlbumService {
         return albumRepository.save(album);
     }
 
-    public Album updateAlbum(Long id, Album albumDetails) {
-        return albumRepository.findById(id)
-            .map(album -> {
-                album.setRef(albumDetails.getRef());
-                album.setName(albumDetails.getName());
-                album.setTitle(albumDetails.getTitle());
-                album.setDescription(albumDetails.getDescription());
-                album.setDuration(albumDetails.getDuration());
-                album.setUrl(albumDetails.getUrl());
-                album.setLike(albumDetails.getLike());
-                album.setStatus(albumDetails.getStatus());
-                album.setTags(albumDetails.getTags());
-                return albumRepository.save(album);
-            }).orElseThrow(() -> new ResourceNotFoundException("Album not found with id " + id));
-        }
+   
 
     public void deleteAlbum(Long id) {
         albumRepository.deleteById(id);
