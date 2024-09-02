@@ -1,5 +1,8 @@
 package com.appmusic.backend.repositories;
 
-public interface StatusRepository {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface StatusRepository  {
 
 }
