@@ -35,7 +35,7 @@ public class AlbumService {
             album.setDescription(albumDetails.getDescription());
             album.setDuration(albumDetails.getDuration());
             album.setUrl(albumDetails.getUrl());
-            album.setLike(albumDetails.getLike());
+            album.setLikes(albumDetails.getLikes());
             album.setStatus(albumDetails.getStatus());
             album.setTags(albumDetails.getTags());
             album.setSongs(albumDetails.getSongs());
