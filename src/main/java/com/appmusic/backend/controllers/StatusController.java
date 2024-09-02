@@ -15,7 +15,7 @@ public class StatusController {
 private StatusService statusService;
 
 @GetMapping
-public List<Status>getAllStatus() {
+public List<Album>getAllStatus() {
 return  statusService.getStatus();
 
 }
