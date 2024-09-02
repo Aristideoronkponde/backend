@@ -23,16 +23,7 @@ public class SongService {
     public Song createSong(Song song) {
         return songRepository.save(song);
     }
-    public Song updateSong(Long id, Song songDetails) {
-        return songRepository.findById(id)
-            .map(song -> {
-                song.setTitle(songDetails.getTitle());
-                song.setDuration(songDetails.getDuration());
-                song.setLyrics(songDetails.getLyrics());
-                song.setAlbum(songDetails.getAlbum());
-                return songRepository.save(song);
-            }).orElseThrow(() -> new ResourceNotFoundException("Song not found with id " + id));
-    }
+    
 
 
 
