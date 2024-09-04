@@ -3,8 +3,9 @@ package com.appmusic.backend.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.appmusic.backend.models.Song;
 import com.appmusic.backend.services.SongService;
@@ -12,6 +13,7 @@ import com.appmusic.backend.services.SongService;
 @RestController
 @RequestMapping("/api/songs")
 public class SongController {
+
     @Autowired
     private SongService songService;
 
@@ -21,25 +23,26 @@ public class SongController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Song> getSongById(@PathVariable Long id) {
-        Song song = songService.getSongById(id);
-        return song != null ? ResponseEntity.ok(song) : ResponseEntity.notFound().build();
+    public Song getSongById(@PathVariable Long id) {
+        return songService.getSongById(id);
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Song createSong(@RequestBody Song song) {
         return songService.createSong(song);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Song> updateSong(@PathVariable Long id, @RequestBody Song songDetails) {
-        Song updatedSong = songService.updateSong(id, songDetails);
-        return updatedSong != null ? ResponseEntity.ok(updatedSong) : ResponseEntity.notFound().build();
+    @Transactional
+    public Song updateSong(@PathVariable Long id, @RequestBody Song songDetails) {
+        return songService.updateSong(id, songDetails);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSong(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Transactional
+    public void deleteSong(@PathVariable Long id) {
         songService.deleteSong(id);
-        return ResponseEntity.noContent().build();
     }
 }

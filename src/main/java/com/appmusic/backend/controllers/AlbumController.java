@@ -3,12 +3,12 @@ package com.appmusic.backend.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.appmusic.backend.models.Album;
 import com.appmusic.backend.services.AlbumService;
-
 
 @RestController
 @RequestMapping("/api/albums")
@@ -23,25 +23,26 @@ public class AlbumController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Album> getAlbumById(@PathVariable Long id) {
-        Album album = albumService.getAlbumById(id);
-        return album != null ? ResponseEntity.ok(album) : ResponseEntity.notFound().build();
+    public Album getAlbumById(@PathVariable Long id) {
+        return albumService.getAlbumById(id);
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Album createAlbum(@RequestBody Album album) {
         return albumService.createAlbum(album);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Album> updateAlbum(@PathVariable Long id, @RequestBody Album albumDetails) {
-        Album updatedAlbum = albumService.updateAlbum(id, albumDetails);
-        return updatedAlbum != null ? ResponseEntity.ok(updatedAlbum) : ResponseEntity.notFound().build();
+    @Transactional
+    public Album updateAlbum(@PathVariable Long id, @RequestBody Album albumDetails) {
+        return albumService.updateAlbum(id, albumDetails);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAlbum(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Transactional
+    public void deleteAlbum(@PathVariable Long id) {
         albumService.deleteAlbum(id);
-        return ResponseEntity.noContent().build();
     }
 }

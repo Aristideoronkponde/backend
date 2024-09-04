@@ -3,8 +3,9 @@ package com.appmusic.backend.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.appmusic.backend.models.Tag;
 import com.appmusic.backend.services.TagService;
@@ -22,25 +23,26 @@ public class TagController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Tag> getTagById(@PathVariable Long id) {
-        Tag tag = tagService.getTagById(id);
-        return tag != null ? ResponseEntity.ok(tag) : ResponseEntity.notFound().build();
+    public Tag getTagById(@PathVariable Long id) {
+        return tagService.getTagById(id);
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Tag createTag(@RequestBody Tag tag) {
         return tagService.createTag(tag);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Tag> updateTag(@PathVariable Long id, @RequestBody Tag tagDetails) {
-        Tag updatedTag = tagService.updateTag(id, tagDetails);
-        return updatedTag != null ? ResponseEntity.ok(updatedTag) : ResponseEntity.notFound().build();
+    @Transactional
+    public Tag updateTag(@PathVariable Long id, @RequestBody Tag tagDetails) {
+        return tagService.updateTag(id, tagDetails);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTag(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Transactional
+    public void deleteTag(@PathVariable Long id) {
         tagService.deleteTag(id);
-        return ResponseEntity.noContent().build();
     }
 }

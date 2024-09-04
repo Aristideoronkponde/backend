@@ -1,14 +1,17 @@
 package com.appmusic.backend.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.appmusic.backend.models.Album;
 import com.appmusic.backend.repositories.AlbumRepository;
 
 @Service
+@Transactional
 public class AlbumService {
 
     @Autowired
@@ -19,7 +22,8 @@ public class AlbumService {
     }
 
     public Album getAlbumById(Long id) {
-        return albumRepository.findById(id).orElse(null);
+        return albumRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Album not found"));
     }
 
     public Album createAlbum(Album album) {
@@ -27,26 +31,21 @@ public class AlbumService {
     }
 
     public Album updateAlbum(Long id, Album albumDetails) {
-        Album album = albumRepository.findById(id).orElse(null);
+        Album album = getAlbumById(id);
+        album.setRef(albumDetails.getRef());
+        album.setName(albumDetails.getName());
+        album.setTitle(albumDetails.getTitle());
+        album.setDescription(albumDetails.getDescription());
+        album.setDuration(albumDetails.getDuration());
+        album.setUrl(albumDetails.getUrl());
+        album.setLikes(albumDetails.getLikes());
+        album.setStatus(albumDetails.getStatus());
+        album.setTags(albumDetails.getTags());
+        album.setSongs(albumDetails.getSongs());
+        return albumRepository.save(album);
+    }
 
-        if (album != null) {
-            album.setName(albumDetails.getName());
-            album.setTitle(albumDetails.getTitle());
-            album.setDescription(albumDetails.getDescription());
-            album.setDuration(albumDetails.getDuration());
-            album.setUrl(albumDetails.getUrl());
-            album.setLikes(albumDetails.getLikes());
-            album.setStatus(albumDetails.getStatus());
-            album.setTags(albumDetails.getTags());
-            album.setSongs(albumDetails.getSongs());
-
-            return albumRepository.save(album);
-            }
-                return null;
-        }
-    
     public void deleteAlbum(Long id) {
         albumRepository.deleteById(id);
     }
-
 }
