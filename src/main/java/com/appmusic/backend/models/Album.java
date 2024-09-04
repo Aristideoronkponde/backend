@@ -14,10 +14,13 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "albums")
 public class Album {
@@ -44,7 +47,7 @@ public class Album {
     private String url;
 
     @Column(nullable = false)
-    private String like;
+    private String likes;
 
     @Column(nullable = false)
     private String status;
