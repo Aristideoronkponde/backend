@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Status {
+public class Status{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
