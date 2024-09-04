@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Tag {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
     private String name;
 }

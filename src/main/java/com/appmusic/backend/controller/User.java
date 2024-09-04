@@ -14,5 +14,4 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
-    private String password; // Assure-toi de stocker les mots de passe de manière sécurisée
-}
+    private String password;}

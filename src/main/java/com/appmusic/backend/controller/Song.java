@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Song {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
     private String title;
     private String lyrics;
