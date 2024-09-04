@@ -10,19 +10,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @AllArgsConstructor
 @Table(name="Tag")
 
 public class Tag {
-@Id
-@GeneratedValue
-@Column(name = "Identifiant")
-private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
 @Column(name = "tags", nullable=false)
 private String name;
