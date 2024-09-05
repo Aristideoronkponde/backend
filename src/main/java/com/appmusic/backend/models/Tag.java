@@ -2,6 +2,8 @@ package com.appmusic.backend.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.*;
+
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -24,5 +26,6 @@ public class Tag {
     private String name;
 
     @ManyToMany(mappedBy = "tags")
+    @JsonBackReference
     private List<Album> albums;
 }

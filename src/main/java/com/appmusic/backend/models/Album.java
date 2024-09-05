@@ -2,6 +2,8 @@ package com.appmusic.backend.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.*;
+
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -50,8 +52,10 @@ public class Album {
         joinColumns = @JoinColumn(name = "album_id"),
         inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
+    @JsonManagedReference
     private List<Tag> tags;
 
     @OneToMany(mappedBy = "album")
+    @JsonIgnore
     private List<Song> songs;
 }
