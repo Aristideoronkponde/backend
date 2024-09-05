@@ -84,3 +84,5 @@ public class Authentification {
    - `PasswordEncoder` est correctement retourné pour être utilisé dans l'encodage des mots de passe.
 
 Avec ces corrections, votre configuration de sécurité Spring Boot devrait fonctionner correctement, en gérant les rôles d'utilisateur, les authentifications via formulaire ou HTTP Basic, et l'encodage des mots de passe.
+
+

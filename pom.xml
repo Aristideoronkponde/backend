@@ -32,15 +32,9 @@
 	<dependencies>
 
 		<dependency>
-<<<<<<< HEAD
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-			<version>3.3.3</version>
-=======
 			<groupId>com.github.javafaker</groupId>
 			<artifactId>javafaker</artifactId>
 			<version>1.0.2</version>
->>>>>>> 9ba610227263c4b243b1a09382941dcafc772588
 		</dependency>
 
 

@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
@@ -31,11 +30,7 @@ public class Tag {
 @Column(name = "tags", nullable=false)
 private String name;
 
-// @Column(name = "création")
-// private LocalDateTime createdAt;
 
-// @Column(name = "modification")
-// private LocalDateTime updatedAt;
 
   @ManyToMany(mappedBy = "tags")
     private List<Album> albums;
